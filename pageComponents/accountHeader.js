@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+//<AccountHeader title="" sillyCoinAmount={sillyCoin} />
+
 const AccountHeader = ({ title, sillyCoinAmount }) => (
   <View style={styles.header}>
     {/* silly coin logo from assets*/}
