@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
-import AccountHeader from './pageComponents/accountHeader.js';
 
 const MusicRoute = () => <Text>Music</Text>;
 
