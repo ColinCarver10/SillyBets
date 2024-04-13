@@ -1,21 +1,24 @@
 import * as React from 'react';
+
+
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { BottomNavigation, Text, Appbar, Button, Avatar, IconButton} from 'react-native-paper';
 import BetsPage from '../screens/BetsPage';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Home from '../screens/Home';
 import ExampleBetsPage from '../screens/ExampleBetsPage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ProfilePage from '../screens/ProfilePage';
+
 
 const HomeRoute = () => <Home />;
-
 const HistoryRoute = () => <Text>My Bets</Text>;
 
 // Define BetRoute component
 const BetRoute = () => <ExampleBetsPage />;
 
 const ShopRoute = () => <Text>Shop</Text>;
-
-const ProfileRoute = () => <Text>Profile</Text>;
+const ProfileRoute = () => <ProfilePage />;
 
 const Layout = ({ children, title, sillyCoinAmount }) => {
   const [index, setIndex] = React.useState(0);
