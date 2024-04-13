@@ -11,9 +11,9 @@
   "dependencies": {
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
-    "galio-framework": "^0.8.0",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.73.6",
+    "react-native-paper": "^5.12.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

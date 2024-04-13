@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { Block } from 'galio-framework';
-import { NavBar } from 'galio-framework';
 
 
 export default function App() {
