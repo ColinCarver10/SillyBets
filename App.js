@@ -1,3 +1,4 @@
+
 import BetsPage from './screens/BetsPage';
 import Home from './screens/Home';
 import { View } from 'react-native';
