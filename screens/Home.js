@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Searchbar, TextInput, Button } from 'react-native-paper';
+import { Searchbar, TextInput, Button, Card } from 'react-native-paper';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -8,7 +8,14 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-        <Text>Home</Text>
+        <Card>
+            <Card.Title title="Card Title" subtitle="Card Subtitle"/>
+            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+            <Card.Content>
+                <Text variant="titleLarge">Card title</Text>
+                <Text variant="bodyMedium">Card content</Text>
+            </Card.Content>
+        </Card>
     </View>
   );
 };

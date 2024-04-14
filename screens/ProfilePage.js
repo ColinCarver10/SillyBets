@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     },
     avatar: {
       alignItems: 'center',
-      marginTop: '25%',
       marginBottom: '0%',
     },
     actionsContainer: {
