@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { BottomNavigation, Text, Appbar, Button, Avatar, IconButton} from 'react-native-paper';
 import BetsPage from '../screens/BetsPage';
@@ -9,7 +7,7 @@ import Home from '../screens/Home';
 import ExampleBetsPage from '../screens/ExampleBetsPage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ProfilePage from '../screens/ProfilePage';
-
+import BetContext from '../contexts/BetContext';
 
 const HomeRoute = () => <Home />;
 const HistoryRoute = () => <Text>My Bets</Text>;
@@ -20,8 +18,9 @@ const BetRoute = () => <ExampleBetsPage />;
 const ShopRoute = () => <Text>Shop</Text>;
 const ProfileRoute = () => <ProfilePage />;
 
-const Layout = ({ children, title, sillyCoinAmount }) => {
+const Layout = ({}) => {
   const [index, setIndex] = React.useState(0);
+  const [totalSillyCoins, setTotalSillyCoins] = React.useState(10);
   const [routes] = React.useState([
     { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
     { key: 'history', title: 'My Bets', focusedIcon: 'view-list', unfocusedIcon: 'view-list-outline' },
@@ -38,6 +37,7 @@ const Layout = ({ children, title, sillyCoinAmount }) => {
     profile: ProfileRoute,
   });
   return (
+    <BetContext.Provider value={{ totalSillyCoins, setTotalSillyCoins }}>
     <View style={styles.container}>
     <Appbar.Header style={styles.header}>
       <View style={styles.leftContainer}>
@@ -54,7 +54,7 @@ const Layout = ({ children, title, sillyCoinAmount }) => {
 
         {/* Account Balance */}
         <Button icon={() => <Image source={require('../assets/sillyCoinLogoSmall.png')} style={styles.customIcon} size={30} />} 
-        mode='contained' buttonColor='#2269f1' onPress={() => {}}>10</Button>
+        mode='contained' buttonColor='#2269f1' onPress={() => {}}>{totalSillyCoins}</Button>
       </View>
     </Appbar.Header>
       <NavigationContainer>
@@ -67,6 +67,7 @@ const Layout = ({ children, title, sillyCoinAmount }) => {
         />
       </NavigationContainer>
     </View>
+    </BetContext.Provider>
   );
 };
 

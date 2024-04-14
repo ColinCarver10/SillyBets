@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity, Image} from 'react-native';
 import { Modal, Portal, Text, Button, PaperProvider, Searchbar, TextInput, IconButton } from 'react-native-paper';
+import BetContext from '../contexts/BetContext';
 
-const ExampleBetsPage = () => {
+const ExampleBetsPage = (props) => {
   const [sillyCoins, setSillyCoins] = React.useState(10);
-  
+  const { totalSillyCoins, setTotalSillyCoins } = React.useContext(BetContext);
+
   const [searchQuery, setSearchQuery] = React.useState('');
   const [groupCode, setGroupCode] = React.useState("");
   const [visibleSearch, setVisibleSearch] = React.useState(false);
@@ -20,6 +22,10 @@ const ExampleBetsPage = () => {
   const showBetModal = () => setBetVisible(true);
   const hideBetModal = () => setBetVisible(false);
 
+  const dummyData = [
+    {id: '1', title: 'Cam Sloss'}
+  ]
+  
   const onChangeSearch = query => {
     setSearchQuery(query);
     // Perform search based on the query
@@ -31,16 +37,18 @@ const ExampleBetsPage = () => {
     setSearchResults(filteredData);
   };
 
-  const dummyData = [
-    {id: '1', title: 'Cam Sloss'}
-  ]
-
   const handleItemClick = item => {
     // Handle item click here
     setUserName(item.title);
     setBetVisible(true); // Open the new modal
     setVisibleSearch(false);
   }
+
+  const handleSubmit = () => {
+    // Update totalSillyCoins in Layout component
+    setTotalSillyCoins(totalSillyCoins - sillyCoins);
+    hideBetModal()
+  };
   return (
     <PaperProvider>
     <View style={styles.container}>
@@ -97,7 +105,7 @@ const ExampleBetsPage = () => {
                         onPress={() => setSillyCoins(sillyCoins + 1)}
                     />
                 </View>
-                <Button mode="contained" buttonColor='#2269f1' style={{marginTop: 20}} onPress={() => console.log('Pressed')}>
+                <Button mode="contained" buttonColor='#2269f1' style={{marginTop: 20}} onPress={() => handleSubmit()}>
                    Submit
                 </Button>
             </Modal>
