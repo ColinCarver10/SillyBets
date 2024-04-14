@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity, Image} from 'react-native';
-import { Modal, Portal, Text, Button, PaperProvider, Searchbar, TextInput } from 'react-native-paper';
+import { Modal, Portal, Text, Button, PaperProvider, Searchbar, TextInput, IconButton } from 'react-native-paper';
 
 const ExampleBetsPage = () => {
+  const [sillyCoins, setSillyCoins] = React.useState(10);
+  
   const [searchQuery, setSearchQuery] = React.useState('');
   const [groupCode, setGroupCode] = React.useState("");
   const [visibleSearch, setVisibleSearch] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState([]);
 
   const [betVisible, setBetVisible] = React.useState(false);
+  const [userName, setUserName] = React.useState("");
+  const [betDescription, setBetDescription] = React.useState("");
 
   const showSearchModal = () => setVisibleSearch(true);
   const hideSearchModal = () => setVisibleSearch(false);
@@ -33,6 +37,7 @@ const ExampleBetsPage = () => {
 
   const handleItemClick = item => {
     // Handle item click here
+    setUserName(item.title);
     setBetVisible(true); // Open the new modal
     setVisibleSearch(false);
   }
@@ -65,9 +70,36 @@ const ExampleBetsPage = () => {
                 />
             </Modal>
         </Portal>
+        {/* Place a bet page */}
         <Portal>
             <Modal visible={betVisible} onDismiss={hideBetModal} style={styles.modal}>
-
+                <Text style={styles.item}>Place a bet</Text>
+                <Text style={{marginTop: 20}}>Betting against: {userName}</Text>
+                <TextInput
+                    label="What are you betting on?"
+                    value={betDescription}
+                    onChangeText={text => setBetDescription(text)}
+                    style={{marginTop: 20}}
+                />
+                <View style={styles.betContainer}>
+                    <IconButton
+                        icon="minus"
+                        iconColor='white'
+                        size={20}
+                        onPress={() => setSillyCoins(sillyCoins - 1)}
+                    />
+                    <Image source={require('../assets/sillyCoinLogoSmall.png')} style={styles.customIcon} size={30} />
+                    <Text style={{color: 'white', marginLeft: 5}}>{sillyCoins}</Text>
+                    <IconButton
+                        icon="plus"
+                        iconColor='white'
+                        size={20}
+                        onPress={() => setSillyCoins(sillyCoins + 1)}
+                    />
+                </View>
+                <Button mode="contained" buttonColor='#2269f1' style={{marginTop: 20}} onPress={() => console.log('Pressed')}>
+                   Submit
+                </Button>
             </Modal>
         </Portal>
         <Portal>
@@ -129,6 +161,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1, // Add a bottom border
         borderBottomColor: 'gray', // Specify the color of the border
     },
+    customIcon: {
+        width: 25,
+        height: 25,
+    },
+    betContainer: {
+        flexDirection: 'row',
+        backgroundColor: '#2269f1',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+    }
 });
 
 export default ExampleBetsPage;
